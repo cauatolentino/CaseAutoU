@@ -212,6 +212,7 @@ main {
 .response-content pre {
     white-space: pre-wrap;
     font-family: inherit;
+    line-height: 1.5;
 }
 
 .response-actions {
@@ -265,6 +266,8 @@ main {
     font-family: inherit;
     font-size: 14px;
     resize: none;
+    line-height: 1.5;
+    white-space: pre-wrap;
 }
 
 .response-textarea:focus {
