@@ -204,7 +204,6 @@ main {
 .response-content pre {
     white-space: pre-wrap;
     font-family: inherit;
-    margin-top: 10px;
 }
 
 .response-actions {

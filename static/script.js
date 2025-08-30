@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 resultText.innerHTML = `<strong>Classificação:</strong> ${data.classification}<br>
 <strong>Resposta Sugerida:</strong><br>
 <div class="response-content">
-<pre style="white-space: pre-wrap; font-family: inherit;">${data.suggested_response}</pre>
+<pre>${data.suggested_response}</pre>
 <textarea class="response-textarea hidden">${data.suggested_response}</textarea>
 </div>
 <div class="response-actions">
