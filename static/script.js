@@ -75,14 +75,60 @@ document.addEventListener('DOMContentLoaded', function() {
     <button class="edit-button">Editar Resposta</button>
     <button class="save-button hidden">Salvar</button>
     <button class="cancel-button hidden">Cancelar</button>
-</div>`;
+</div><button class="new-classification-button">Classificar Novo Email</button>`;
 
-                // Adicionar eventos aos botões
+
                 const editButton = resultText.querySelector('.edit-button');
                 const saveButton = resultText.querySelector('.save-button');
                 const cancelButton = resultText.querySelector('.cancel-button');
                 const preElement = resultText.querySelector('pre');
                 const textareaElement = resultText.querySelector('.response-textarea');
+
+                const newClassificationButton = resultText.querySelector('.new-classification-button');
+                newClassificationButton.addEventListener('click', function() {
+                    const modalOverlay = document.createElement('div');
+                    modalOverlay.className = 'modal-overlay';
+                    const modalHTML = `
+                        <div class="modal">
+                            <div class="modal-content">
+                                <p>Você tem certeza que deseja classificar um novo email?<br>Isso vai apagar os dados do seu atual.</p>
+                                <div class="modal-buttons">
+                                    <button class="modal-button-yes">Sim</button>
+                                    <button class="modal-button-no">Não</button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+
+                    modalOverlay.innerHTML = modalHTML;
+                    document.body.appendChild(modalOverlay);
+
+                    const yesButton = modalOverlay.querySelector('.modal-button-yes');
+                    const noButton = modalOverlay.querySelector('.modal-button-no');
+
+                    yesButton.addEventListener('click', function() {
+                        textarea.value = '';
+                        textarea.dispatchEvent(new Event('input'));
+                        
+                        resultText.innerHTML = 'Aguardando classificação...';
+                        
+                        fileInput.value = '';
+                        
+                        document.querySelector('#main_section').scrollIntoView({ behavior: 'smooth' });
+                        
+                        document.body.removeChild(modalOverlay);
+                    });
+
+                    noButton.addEventListener('click', function() {
+                        document.body.removeChild(modalOverlay);
+                    });
+
+                    modalOverlay.addEventListener('click', function(e) {
+                        if (e.target === modalOverlay) {
+                            document.body.removeChild(modalOverlay);
+                        }
+                    });
+                });
 
                 editButton.addEventListener('click', function() {
                     preElement.classList.add('hidden');
