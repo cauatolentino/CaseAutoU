@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case AutoU</title>
+    <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h2>Case Prático AutoU</h2>
+        <p>Sistema de Classificação Automático</p>
+    </header>
+    <main>
+        <div id="main_section">
+            <div>
+                <h2>Classificador de Email</h2>
+                <p>Insira seu texto abaixo ou faça o upload de arquivo para classificação automática</p>
+            </div>
+            <div id="upload_section">
+                <!-- <label for="email_uploads">Clique para upload<br>Formatos: TXT, PDF</label> -->
+                <p id="description_upload">Clique para upload</p>
+                <p id="format_upload">Formatos: TXT, PDF</p>
+                <input type="file" id="email_uploads" name="email_uploads" accept=".txt,.pdf">
+            </div>
+            <p>ou</p>
+            <div id="text_section">
+                <textarea placeholder="Cole aqui o texto para classificação"></textarea>
+                <!-- <input type="text" placeholder="Cole aqui o texto para classificação"> -->
+            </div>
+            <div>
+                <button id="classify_button">Classificar Email</button>
+            </div>
+        </div>
+        <div id="result_section">
+            <div id="waiting_result">
+                <h2>Resultado da Classificação</h2>
+                <p id="result_text">Aguardando classificação...</p>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>Desenvolvido por Cauã Tolentino</p>
+        <p>Parte do Processo Seletivo para o AutoU</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
