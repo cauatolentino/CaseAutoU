@@ -201,6 +201,12 @@ main {
     border: 1px solid #eee;
 }
 
+.response-content pre {
+    white-space: pre-wrap;
+    font-family: inherit;
+    margin-top: 10px;
+}
+
 .response-actions {
     margin-top: 15px;
     display: flex;
