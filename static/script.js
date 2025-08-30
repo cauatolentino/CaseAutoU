@@ -48,7 +48,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // Adicionar evento de clique ao botão classificar
     button.addEventListener('click', async function() {
         const text = textarea.value.trim();
         if (!text) return;
@@ -66,7 +65,51 @@ document.addEventListener('DOMContentLoaded', function() {
             
             if (response.ok) {
                 const resultText = document.querySelector('#result_text');
-                resultText.innerHTML = `<strong>Classificação:</strong> ${data.classification}<br><strong>Resposta Sugerida:</strong><br><pre style="white-space: pre-wrap; font-family: inherit; margin-top: 10px;">${data.suggested_response}</pre>`;
+                resultText.innerHTML = `<strong>Classificação:</strong> ${data.classification}<br>
+<strong>Resposta Sugerida:</strong><br>
+<div class="response-content">
+<pre style="white-space: pre-wrap; font-family: inherit;">${data.suggested_response}</pre>
+<textarea class="response-textarea hidden">${data.suggested_response}</textarea>
+</div>
+<div class="response-actions">
+    <button class="edit-button">Editar Resposta</button>
+    <button class="save-button hidden">Salvar</button>
+    <button class="cancel-button hidden">Cancelar</button>
+</div>`;
+
+                // Adicionar eventos aos botões
+                const editButton = resultText.querySelector('.edit-button');
+                const saveButton = resultText.querySelector('.save-button');
+                const cancelButton = resultText.querySelector('.cancel-button');
+                const preElement = resultText.querySelector('pre');
+                const textareaElement = resultText.querySelector('.response-textarea');
+
+                editButton.addEventListener('click', function() {
+                    preElement.classList.add('hidden');
+                    textareaElement.classList.remove('hidden');
+                    editButton.classList.add('hidden');
+                    saveButton.classList.remove('hidden');
+                    cancelButton.classList.remove('hidden');
+                });
+
+                saveButton.addEventListener('click', function() {
+                    const newText = textareaElement.value;
+                    preElement.textContent = newText;
+                    preElement.classList.remove('hidden');
+                    textareaElement.classList.add('hidden');
+                    editButton.classList.remove('hidden');
+                    saveButton.classList.add('hidden');
+                    cancelButton.classList.add('hidden');
+                });
+
+                cancelButton.addEventListener('click', function() {
+                    textareaElement.value = preElement.textContent;
+                    preElement.classList.remove('hidden');
+                    textareaElement.classList.add('hidden');
+                    editButton.classList.remove('hidden');
+                    saveButton.classList.add('hidden');
+                    cancelButton.classList.add('hidden');
+                });
             } else {
                 throw new Error(data.error || 'Erro ao classificar texto');
             }
