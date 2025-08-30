@@ -2,6 +2,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const textarea = document.querySelector('#text_section textarea');
     const button = document.querySelector('#classify_button');
     const fileInput = document.querySelector('#email_uploads');
+
+    let isClassifying = false;
     
     button.disabled = true;
     
@@ -50,9 +52,17 @@ document.addEventListener('DOMContentLoaded', function() {
     
     button.addEventListener('click', async function() {
         const text = textarea.value.trim();
-        if (!text) return;
+        if (!text || isClassifying) return;
 
         try {
+            // Ativa o estado de loading
+            isClassifying = true;
+            button.disabled = true;
+            button.classList.remove('active');
+            button.classList.add('loading');
+            const originalText = button.innerHTML;
+            button.innerHTML = '<div class="loading-spinner"></div>Classificando...';
+
             const response = await fetch('/classify', {
                 method: 'POST',
                 headers: {
@@ -156,13 +166,22 @@ document.addEventListener('DOMContentLoaded', function() {
                     saveButton.classList.add('hidden');
                     cancelButton.classList.add('hidden');
                 });
-            } else {
+            }else{
                 throw new Error(data.error || 'Erro ao classificar texto');
             }
 
-        } catch (error) {
+        }catch(error){
             console.error('Erro:', error);
             alert('Erro ao classificar o texto: ' + error.message);
+        }finally{
+            // Restaura o estado original do botão
+            isClassifying = false;
+            button.disabled = false;
+            button.classList.remove('loading');
+            if (textarea.value.trim() !== '') {
+                button.classList.add('active');
+            }
+            button.innerHTML = 'Classificar Email';
         }
     });
 });
