@@ -372,56 +372,12 @@ main {
     gap: 10px;
 }
 
-/* .response-actions button {
-    padding: 8px 15px;
-    border-radius: 4px;
-    border: none;
-    cursor: pointer;
-    font-size: 14px;
-    transition: all 0.3s ease;
-} */
-
-/* .copy-button {
-    background-color: #442433;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-    margin-top: 20px;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.edit-button {
-    background-color: #442433;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-    margin-top: 20px;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-} */
-
 .response-actions button {
-    /* A. Para o alinhamento INTERNO (ícone e texto) */
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px; /* Opcional: Adiciona um espaço elegante entre o ícone e o texto */
-
-    /* B. Para o tamanho UNIFORME (a solução do tamanho) */
-    min-width: 130px; /* << AJUSTE ESTE VALOR conforme o tamanho do seu botão "Editar Resposta" */
-
-    /* C. Estilos comuns a todos os botões */
+    gap: 8px;
+    min-width: 130px;
     padding: 10px 15px;
     border: none;
     border-radius: 4px;
