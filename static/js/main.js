@@ -131,7 +131,7 @@ async function handleFileChange(e) {
     }
 
     try {
-        const data = await api.uploadFileAndGetTex(file);
+        const data = await api.uploadFileAndGetText(file);
         UI.textarea.value = data.text;
         updateButtonState(); // Dispara a atualização do botão
     } catch (error) {
@@ -158,6 +158,42 @@ async function handleClassifyClick() {
     } finally {
         setClassifyButtonLoading(false);
     }
+}
+
+/**
+ * Lida com o clique no botão de copiar.
+ * Copia o texto da sugestão para a área de transferência e fornece feedback visual.
+ * @param {HTMLElement} copyButton - O elemento do botão que foi clicado.
+ */
+function handleCopyClick(copyButton) {
+    const resultCard = copyButton.closest('.result-content');
+    if (!resultCard) {
+        console.error("Elemento '.result-content' pai não encontrado.");
+        return;
+    }
+
+    const preElement = resultCard.querySelector('pre');
+    const textareaElement = resultCard.querySelector('.response-textarea');
+
+    const textToCopy = textareaElement.classList.contains('hidden') 
+        ? preElement.textContent 
+        : textareaElement.value;
+
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        const originalHTML = copyButton.innerHTML;
+        
+        copyButton.classList.add('copied');
+        copyButton.innerHTML = '<span class="material-symbols-outlined">done</span> Copiado!';
+
+        setTimeout(() => {
+            copyButton.classList.remove('copied');
+            copyButton.innerHTML = originalHTML;
+        }, 2000);
+
+    }).catch(err => {
+        console.error('Falha ao copiar texto: ', err);
+        alert('Não foi possível copiar o texto.');
+    });
 }
 
 /**
@@ -195,6 +231,8 @@ function handleResultActions(e) {
         toggleEditMode(false);
     } else if (button.matches('.new-classification-button')) {
         showConfirmationModal();
+    } else if (button.matches('.copy-button')) {
+         handleCopyClick(button);
     }
 }
 
