@@ -29,7 +29,7 @@ header {
     background-color: rgba(170, 227, 171, 0.8);
     backdrop-filter: blur(2px);
     -webkit-backdrop-filter: blur(2px);
-    position: fixed;
+    /* position: fixed; */
     top: 0;
     left: 0;
     z-index: 1000;
@@ -66,6 +66,26 @@ main {
     margin-bottom: 15px;
     text-align: center;
     font-weight: 600;
+}
+
+.result-content, .response-content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.classification-line {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.classification-text.is-productive {
+    color: green;
+}
+
+.classification-text.is-unproductive {
+    color: red;
 }
 
 .help-button {
@@ -420,7 +440,6 @@ main {
     border-radius: 4px;
     font-family: inherit;
     font-size: 14px;
-    font-weight: 800;
     resize: none;
     line-height: 1.5;
     white-space: pre-wrap;
