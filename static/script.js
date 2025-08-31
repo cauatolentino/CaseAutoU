@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', function() {
             button.classList.remove('active');
             button.classList.add('loading');
             const originalText = button.innerHTML;
-            button.innerHTML = '<div class="loading-spinner"></div>Classificando...';
+            button.innerHTML = '<span class="spinner-wrapper"><span class="material-symbols-outlined icon-spin">progress_activity</span></span> Classificando...';
 
             const response = await fetch('/classify', {
                 method: 'POST',
@@ -76,16 +76,16 @@ document.addEventListener('DOMContentLoaded', function() {
             if (response.ok) {
                 const resultText = document.querySelector('#result_text');
                 resultText.innerHTML = `<strong>Classificação:</strong> ${data.classification}<br>
-<strong>Resposta Sugerida:</strong><br>
+<strong>Resposta Sugerida:</strong>
 <div class="response-content">
 <pre>${data.suggested_response}</pre>
 <textarea class="response-textarea hidden">${data.suggested_response}</textarea>
 </div>
 <div class="response-actions">
-    <button class="edit-button">Editar Resposta</button>
+    <button class="edit-button"><span class="material-symbols-outlined icon-edit">edit</span>Editar Resposta</button>
     <button class="save-button hidden">Salvar</button>
     <button class="cancel-button hidden">Cancelar</button>
-</div><button class="new-classification-button">Classificar Novo Email</button>`;
+</div><button class="new-classification-button"><span class="material-symbols-outlined icon-cached">cached</span>Classificar Novo Email</button>`;
 
 
                 const editButton = resultText.querySelector('.edit-button');
@@ -181,7 +181,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (textarea.value.trim() !== '') {
                 button.classList.add('active');
             }
-            button.innerHTML = 'Classificar Email';
+            button.innerHTML = '<span class="material-symbols-outlined icon-mail">mail</span>Classificar Email';
         }
     });
 });
