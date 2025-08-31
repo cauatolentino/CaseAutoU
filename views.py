@@ -50,7 +50,7 @@ def classify_email():
         if not email_text:
             return jsonify({'error': 'Texto não fornecido'}), 400
 
-        # Primeiro, classificar o email
+        # Primeiro classifica o email
         classification_response = client.chat.completions.create(
             model="gpt-4.1-mini",
             messages=[
@@ -61,15 +61,7 @@ def classify_email():
         
         classification = classification_response.choices[0].message.content.strip()
 
-        formated_classification = ""
-        if classification.upper() == "PRODUTIVO":
-            formated_classification = "PRODUTIVO ✅"
-        elif classification.upper() == "IMPRODUTIVO":
-            formated_classification = "IMPRODUTIVO ❌"
-        else:
-            formated_classification = classification
-
-        # Depois, gerar uma resposta adequada baseada na classificação
+        # Depois gera uma resposta adequada baseada na classificação
         response_prompt = f"""Com base no seguinte email e sua classificação como {classification}, gere uma resposta profissional e adequada.
         
         Email original:
@@ -94,7 +86,7 @@ def classify_email():
         suggested_response = response_completion.choices[0].message.content.strip()
         
         return jsonify({
-            'classification': formated_classification,
+            'classification': classification,
             'text': email_text,
             'suggested_response': suggested_response
         })
