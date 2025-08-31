@@ -1,7 +1,6 @@
 from main import app
 from flask import render_template, request, jsonify
-import PyPDF2
-import io
+import fitz
 from openai import OpenAI
 import os
 
@@ -26,10 +25,14 @@ def upload_file():
             return jsonify({'text': content})
             
         elif file.filename.endswith('.pdf'):
-            pdf_reader = PyPDF2.PdfReader(io.BytesIO(file.read()))
+            file_bytes = file.read()
+            pdf_document = fitz.open(stream=file_bytes, filetype="pdf")
             text = ""
-            for page in pdf_reader.pages:
-                text += page.extract_text() + "\n"
+            for page_num in range(len(pdf_document)):
+                page = pdf_document.load_page(page_num)
+                text += page.get_text() + "\n"
+            
+            pdf_document.close()
             return jsonify({'text': text})
             
         else:
