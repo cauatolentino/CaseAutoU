@@ -26,13 +26,13 @@ A aplicação web utiliza Inteligência Artificial para classificar emails em **
 
 Um vídeo de apresentação foi gravado para demonstrar as funcionalidades da aplicação, explicar as escolhas técnicas e resumir o desenvolvimento do projeto.
 
-**➡️ Assistir no YouTube: [Clique Aqui](assim_que_tiver_o_link_eu_ponho)**
+**➡️ Assistir no YouTube: [Clique Aqui](https://youtu.be/Qy2MkSSJoz0)**
 
 ## 🌐 Link da Aplicação
 
 A aplicação está hospedada na nuvem utilizando a plataforma Render e pode ser acessada publicamente através do link abaixo:
 
-**➡️ Acessar a Aplicação: [Clique Aqui](assim_que_tiver_o_link_eu_ponho)**
+**➡️ Acessar a Aplicação: [Clique Aqui](https://ctcaseautou.onrender.com/)**
 
 ## ✨ Funcionalidades
 
